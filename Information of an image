@@ -1,0 +1,36 @@
+ import numpy as np
+import cv2
+
+cv2.namedWindow('image',cv2.WINDOW_NORMAL)# Create window with freedom of dimensions
+imgloc="IMG_3317.BMP" # The address of image with BMP format
+image=cv2.imread(imgloc,-1)   # Reading(loading) the above image unchanged
+cv2.imshow('image',image)     #Display the above image(first argument is a window name)
+
+##------------------------------------------------------------------------------
+#Shape of image is accessed by img.shape and returns a tuple of number of rows, columns and channels 
+Dimensions=image.shape
+Height=image.shape[0]
+Width=image.shape[1]
+Channels=image.shape[2]
+Size=image.size   # Total number of pixels is accessed by img.size
+Depth=image.dtype #Depth of image is the type of data
+
+##-----------------------------------------------------------------------------
+x=imgloc.split('/')
+Name=x[len(x)-1]
+NameList=Name.split('.')
+Name=NameList[0]
+Format=NameList[len(NameList)-1]
+
+##-----------------------------------------------------------------------------
+print('===========OUTPUT=====================')
+print('==========Question1-Part a ===========')
+print('Image Dimension    : ',Dimensions)
+print('Image Height       : ',Height)
+print('Image Width        : ',Width)
+print('Number of Channels : ',Channels)
+print('Size of image : ',Size)
+print('Depth of image : ',Depth)
+print('Name of Image : ',Name)
+print('Format of Image : ',Format)
+print('======================================')
