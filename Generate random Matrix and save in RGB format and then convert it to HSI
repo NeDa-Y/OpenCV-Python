@@ -1,0 +1,42 @@
+#Generate a random matrix 512*512*3 and save in a RGB format, then convert it to HSI and split its channels
+
+import numpy as np 
+import cv2 
+
+#generating RGB image with random numbers
+rgb = np.random.randint(255, size=(512,512,3),dtype=np.uint8)
+cv2.imshow('RGB',rgb)
+cv2.waitKey(0)
+#Saving generated image
+cv2.imwrite('HW/Q3/generatepic.png',rgb, [int(cv2.IMWRITE_PNG_COMPRESSION)])
+#converting RGB to HIS manually
+
+def RGB_TO_HSI(img):
+with np.errstate(divide='ignore', invalid='ignore'):
+rgb = np.int32(cv2.split(img))
+blue = rgb[0]
+green = rgb[1]
+red = rgb[2]
+intensity = np.divide(blue + green + red, 3) 
+minimum = np.minimum(np.minimum(red, green), blue)
+saturation = 1 - 3 * np.divide(minimum, red + green + blue)
+sqrt_calc = np.sqrt(((red - green) * (red - green)) + ((red - blue) * (green - blue)))
+if (green >= blue).any():
+hue = np.arccos((1/2 * ((red-green) + (red - blue)) / sqrt_calc))
+else:
+hue = 2*pi - np.arccos((1/2 * ((red-green) + (red - blue)) / sqrt_calc))
+hue = hue*180/pi
+hsi = cv2.merge((hue, saturation, intensity))
+return hsi
+
+# Displaing HIS,H,S,I HSI=RGB_TO_HSI(rgb)
+H,S,I=cv2.split(HSI)
+cv2.namedWindow('HSI', cv2.WINDOW_NORMAL)
+cv2.namedWindow('Hue', cv2.WINDOW_NORMAL)
+cv2.namedWindow('Saturation', cv2.WINDOW_NORMAL)
+cv2.namedWindow('Intensity', cv2.WINDOW_NORMAL)
+cv2.imshow('HSI',HSI) cv2.imshow('Hue',H)
+cv2.imshow('Saturation',S)
+cv2.imshow('Intensity',I)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
