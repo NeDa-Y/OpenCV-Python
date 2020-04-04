@@ -1,0 +1,25 @@
+import numpy as np
+import cv2
+
+
+imgloc="Image Processing/HW/Q2/Mypainting.bmp"
+# The address of image with BMP format
+image=cv2.imread(imgloc,-1)   # Reading(loading) the above image unchanged
+
+cv2.imshow('image',image)     #Display the above image(first argument is a window name)
+cv2.namedWindow('Inverse image',cv2.WINDOW_NORMAL)
+
+Inverseimage = abs(255-image)   # Mathematic way
+img_not = cv2.bitwise_not(image)    #Bitwise way
+
+cv2.imwrite('Inverse image-Bitwise way.bmp',Inverseimage)
+cv2.imwrite('Inverse1-Math way.bmp',img_not)
+
+cv2.namedWindow('Inverse image',cv2.WINDOW_NORMAL)
+cv2.namedWindow('Inverse1',cv2.WINDOW_NORMAL)
+
+cv2.imshow("Inverse1-Math way",img_not)
+cv2.imshow('Inverse image-Bitwise way',Inverseimage)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
