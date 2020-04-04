@@ -1,0 +1,24 @@
+import numpy as np
+import cv2
+
+imgloc="HW/Q2/Mypainting.BMP"
+image=cv2.imread(imgloc,-1)
+img=cv2.cvtColor(image,cv2.COLOR_BGRA2BGR)
+
+
+
+JPEGImage= cv2.imread('HW/Q2/Mypainting.jpg',-1)
+TIFFImage= cv2.imread('HW/Q2/Mypainting.tiff',-1)
+
+result1 = cv2.subtract(img,JPEGImage)
+result2 = cv2.subtract(img,TIFFImage)
+
+cv2.namedWindow("Subtracting JPEG Images", cv2.WINDOW_NORMAL)
+cv2.imshow("Subtracting JPEG Images", result1)
+
+cv2.namedWindow("Subtracting TIFF Images", cv2.WINDOW_NORMAL)
+cv2.imshow("Subtracting TIFF Images", result2)
+
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
