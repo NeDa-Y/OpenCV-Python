@@ -1,0 +1,9 @@
+import numpy as np
+import cv2
+
+
+imgloc="IMG_3317.BMP"
+The address of image with BMP format
+image=cv2.imread(imgloc,-1)   # Reading(loading) the above image unchanged
+# we can split channels with the following function
+b,g,r,z= cv2.split(image) #is a costly operation (in terms of time)
